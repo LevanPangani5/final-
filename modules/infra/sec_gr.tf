@@ -1,9 +1,9 @@
 #SECURITY GROUPS #
  
-resource "aws_security_group" "sg-infra-host" {
+resource "aws_security_group" "sg-infra-website" {
   name        = "${var.sg_name_website}-${var.env}"
   description = "sg for servers running our app"
-  vpc_id      = aws_vpc.vpc-ec1-infra.id
+  vpc_id      = var.vpc_id
  
  ingress {
     description = "Allow HTTP"
@@ -67,7 +67,7 @@ resource "aws_security_group" "sg-infra-host" {
 resource "aws_security_group" "sg-infra-redis" {
   name        = "${var.sg_name_redis}-${var.env}"
   description = "sg for servers running redis"
-  vpc_id      = aws_vpc.vpc-ec1-infra.id
+  vpc_id      = var.vpc_id
  
  
   ingress {
@@ -75,7 +75,7 @@ resource "aws_security_group" "sg-infra-redis" {
     from_port   = 6379
     to_port     = 6379
     protocol    = "tcp"
-     security_groups = [aws_security_group.sec-gr-infra-host.id]
+     security_groups = [aws_security_group.sg-infra-website.id]
   }
  
  
@@ -114,9 +114,9 @@ resource "aws_security_group" "sg-infra-redis" {
 
 
 resource "aws_security_group" "sg-infra-alb" {
-  name        = "${var.sg_name_website}-${var.env}"
+  name        = "${var.sg_name_alb}-${var.env}"
   description = "sg for servers running our app"
-  vpc_id      = aws_vpc.vpc-ec1-infra.id
+  vpc_id      = var.vpc_id
  
  ingress {
     description = "Allow HTTP"

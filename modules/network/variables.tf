@@ -95,22 +95,6 @@ variable "vpc_peer_name" {
   default = "vpc-peer-runner-infra"
 }
 
-variable "sg_name_website" {
-  type =string
-  default = "sec-gr-ec1-1a-web"
-}
-
-variable "sg_name_redis" {
-  type =string
-  default = "sec-gr-ec1-1a-redis"
-}
-
-variable "sg_name_alb" {
-  type =string
-  default = "sec-gr-ec1-1a-alb"
-}
-
-
 variable "env" {
   type = string
   default = "d"
